@@ -1,17 +1,14 @@
 pipeline {
     agent any
-    tools {
-        maven 'Maven3'
-    }
     stages {
-        stage('Compilar') {
+        stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                bat 'mvn clean package'
             }
         }
-        stage('Pruebas de Integración') {
+        stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
     }
