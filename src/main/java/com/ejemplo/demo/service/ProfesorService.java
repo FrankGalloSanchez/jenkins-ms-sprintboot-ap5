@@ -15,4 +15,8 @@ public class ProfesorService {
                 new Profesor(2L, "Ana Gómez")
         );
     }
+
+    public Profesor obtenerPorId(Long id) {
+        return new Profesor(id, "Profesor " + id);
+    }
 }

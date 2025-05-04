@@ -2,7 +2,10 @@ package com.ejemplo.demo.controller;
 
 import com.ejemplo.demo.model.Profesor;
 import com.ejemplo.demo.service.ProfesorService;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +24,15 @@ public class ProfesorController {
     @GetMapping
     public List<Profesor> listar() {
         return profesorService.obtenerTodos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Profesor> obtenerPorId(@PathVariable Long id) {
+        Profesor profesor = profesorService.obtenerPorId(id);
+        if (profesor != null) {
+            return ResponseEntity.ok(profesor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

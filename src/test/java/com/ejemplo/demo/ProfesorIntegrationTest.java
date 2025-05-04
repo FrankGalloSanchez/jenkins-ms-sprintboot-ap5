@@ -21,11 +21,23 @@ public class ProfesorIntegrationTest {
 
 	@Test
 	void deberiaListarProfesores() {
-		ResponseEntity<Profesor[]> response =
-				restTemplate.getForEntity("http://localhost:" + port + "/profesores", Profesor[].class);
+		ResponseEntity<Profesor[]> response = restTemplate.getForEntity("http://localhost:" + port + "/profesores",
+				Profesor[].class);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertNotNull(response.getBody());
 		assertTrue(response.getBody().length > 0);
+	}
+
+	@Test
+	void deberiaObtenerProfesorPorId() {
+		Long profesorId = 1L;
+
+		ResponseEntity<Profesor> response = restTemplate
+				.getForEntity("http://localhost:" + port + "/profesores/" + profesorId, Profesor.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertEquals(profesorId, response.getBody().getId());
 	}
 }
